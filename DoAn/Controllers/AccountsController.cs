@@ -13,11 +13,9 @@ namespace DoAn.Controllers
     public class AccountsController : ControllerBase
     {
         private readonly IAccountRepository _accountRepository;
-        private readonly ApplicationDbContext _context; 
-        public AccountsController(IAccountRepository accountRepository, ApplicationDbContext context)
+        public AccountsController(IAccountRepository accountRepository)
         {
             _accountRepository = accountRepository;
-            _context = context;
         }
         [HttpPost("login")]
         public async Task<IActionResult> SignIn([FromBody] SignInModel signInModel)

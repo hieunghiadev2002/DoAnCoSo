@@ -22,7 +22,17 @@ namespace DoAn.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllProducts()
         {
-           var sanPhams = await _context.SanPhams.Include(x => x.LoaiSanPham).ToListAsync();
+            var sanPhams = await _context.SanPhams.Select(x => new
+            {
+                x.MaSanPham,
+                x.TenSanPham,
+                x.MoTa,
+                x.MaLoai,
+                x.NgayPhatHanh,
+                x.SoLuongBan,
+                x.ThoiGianBaoHanh,
+                x.LoaiSanPham.TenLoai
+            }).ToListAsync();
             var res = new
             {
                 message = "Get all products successfully",

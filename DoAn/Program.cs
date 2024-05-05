@@ -87,10 +87,13 @@ builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<IHangSanXuatRepository, HangSanXuatRepository>();
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll",
-               builder => builder.AllowAnyOrigin()
-                      .AllowAnyMethod()
-                             .AllowAnyHeader());
+    options.AddPolicy("AllowSpecificOrigins",
+               builder =>
+               {
+                   builder.WithOrigins("http://localhost:5500")
+                   .AllowAnyHeader()
+                       .AllowAnyMethod();
+               });
 });
 var app = builder.Build();
 
@@ -106,5 +109,5 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-app.UseCors("AllowAll");
+app.UseCors("AllowSpecificOrigins");
 app.Run();

@@ -18,14 +18,10 @@ namespace DoAn.Controllers
             _hangSanXuatRepository = hangSanXuatRepository;
         }
         [HttpGet]
-        public async Task<IActionResult> GetAllHangSanXuat(string sortBy = "tenHang", bool isAscending = true, string keyword = null, int page = 1, int pageSize = 10)
+        public async Task<IActionResult> GetAllHangSanXuat()
         {
 
-            var HangSanXuats = await _hangSanXuatRepository.GetAllHangSanXuatAsync(sortBy, isAscending, keyword, page, pageSize);
-          
-
-
-
+            var HangSanXuats = await _context.HangSXes.ToListAsync();
             return Ok(HangSanXuats);     
         }
         [HttpGet("{id}")]

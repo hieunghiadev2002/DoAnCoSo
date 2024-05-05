@@ -28,33 +28,9 @@ namespace DoAn.Repository
             throw new NotImplementedException();
         }
 
-        async Task<IEnumerable<HangSX>> IHangSanXuatRepository.GetAllHangSanXuatAsync(string sortBy, bool isAscending, string keyword, int page, int pageSize)
+        async Task<IEnumerable<HangSX>> IHangSanXuatRepository.GetAllHangSanXuatAsync()
         {
-            IQueryable<HangSX> query = _context.HangSXes; 
-            if(!string.IsNullOrEmpty(keyword))
-            {
-                query = query.Where(x => x.TenHangSX.Contains(keyword));
-            }
-            //Sorting 
-            switch(sortBy)
-            {
-                case "TenHangSX":
-                    if (isAscending)
-                    {
-                        query = query.OrderBy(x => x.TenHangSX);
-                    }
-                    else
-                    {
-                        query = query.OrderByDescending(x => x.TenHangSX);
-                    }
-                    break;
-                default:
-                    query = query.OrderBy(x => x.TenHangSX);
-                    break;
-            }
-            var skipAmount = (page - 1) * pageSize;
-            query = query.Skip(skipAmount).Take(pageSize);
-            return await query.ToListAsync();
+            throw new NotImplementedException();
         }
 
         Task<HangSanXuatDTO> IHangSanXuatRepository.GetById(int id)
